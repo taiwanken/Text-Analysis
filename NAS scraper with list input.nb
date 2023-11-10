@@ -1,0 +1,477 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     22596,        469]
+NotebookOptionsPosition[     21988,        450]
+NotebookOutlinePosition[     22413,        467]
+CellTagsIndexPosition[     22370,        464]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{
+    "this", " ", "is", " ", "a", " ", "code", " ", "snippet", " ", "modified",
+      " ", "from", " ", "Zane", " ", 
+     RowBox[{"Austen", "'"}], "s", " ", "code", " ", "from", " ", "a", " ", 
+     "similar", " ", "project"}], ",", " ", 
+    RowBox[{
+     RowBox[{"found", " ", 
+      RowBox[{"here", ":", " ", "https", ":"}]}], "//", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"www", ".", "zaneausten", ".", "com"}], "/", "p"}], "/", 
+       "lky"}], "-", "anthology"}]}]}], "*)"}], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"downloadPDF", "[", 
+     RowBox[{"pdfUrl_", ",", "destinationFolder_"}], "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "pdfName", "}"}], ",", 
+      RowBox[{
+       RowBox[{"pdfName", "=", 
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{
+          "\"\</Users/tanai/SPEECHES/\>\"", ",", "destinationFolder", ",", 
+           RowBox[{"FileNameTake", "[", "pdfUrl", "]"}]}], "}"}], "]"}]}], 
+       ";", "\[IndentingNewLine]", 
+       RowBox[{"URLSave", "[", 
+        RowBox[{"pdfUrl", ",", "pdfName"}], "]"}]}]}], "]"}]}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"downloadSpeeches", "[", 
+     RowBox[{"urls_List", ",", "pageRanges_List", ",", "folders_List"}], 
+     "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"hyperlinks", ",", "pdfs"}], "}"}], ",", 
+      RowBox[{"MapThread", "[", 
+       RowBox[{
+        RowBox[{"Function", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"url", ",", "folder", ",", "pageRange"}], "}"}], ",", 
+          RowBox[{
+           RowBox[{"hyperlinks", "=", 
+            RowBox[{"Flatten", "[", 
+             RowBox[{"Table", "[", 
+              RowBox[{
+               RowBox[{"Import", "[", 
+                RowBox[{
+                 RowBox[{"url", "<>", 
+                  RowBox[{"ToString", "[", "page", "]"}]}], ",", 
+                 "\"\<Hyperlinks\>\""}], "]"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"page", ",", "pageRange"}], "}"}]}], "]"}], "]"}]}], 
+           ";", "\[IndentingNewLine]", 
+           RowBox[{"pdfs", "=", 
+            RowBox[{"Select", "[", 
+             RowBox[{"hyperlinks", ",", 
+              RowBox[{
+               RowBox[{"StringMatchQ", "[", 
+                RowBox[{"#", ",", 
+                 RowBox[{"__", "~~", "\"\<.pdf\>\"", "~~", "EndOfString"}]}], 
+                "]"}], "&"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"Do", "[", 
+            RowBox[{
+             RowBox[{"downloadPDF", "[", 
+              RowBox[{"pdf", ",", "folder"}], "]"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"pdf", ",", "pdfs"}], "}"}]}], "]"}], ";"}]}], "]"}], 
+        ",", 
+        RowBox[{"{", 
+         RowBox[{"urls", ",", "folders", ",", "pageRanges"}], "}"}]}], 
+       "]"}]}], "]"}]}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Specify", " ", "URLs"}], ",", 
+     RowBox[{"page", " ", "ranges"}], ",", 
+     RowBox[{"and", " ", "destination", " ", "folders", " ", "here"}]}], 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"urls", "=", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Abdullah+Tarmugi&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Ahmad+Mattar&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Chan+Chun+Sing&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Chee+Hong+Tat&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Chua+Sian+Chin&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=David+Lim+Tik+En&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Desmond+Lee+Ti-Seng&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=E+W+Barker&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Edwin+Tong&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Gan+Kim+Yong&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=George+Yeo+Yong-Boon&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Goh+Chok+Tong&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Goh+Keng+Swee&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Grace+Fu+Hai+Yien&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Heng+Swee+Keat&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Hon+Sui+Sen&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Howe+Yoon+Chong&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Indranee+Rajah&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Jek+Yeun+Thong&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Josephine+Teo&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=K+Shanmugam&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Khaw+Boon+Wan&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Lawrence+Wong&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Lee+Boon+Yang&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Lee+Chiaw+Meng&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Lee+Hsien+Loong&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Lee+Kuan+Yew&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Lee+Yock+Suan&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Lim+Boon+Heng&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Lim+Chee+Onn&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Lim+Hng+Kiang&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Lim+Hwee+Hua&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Lim+Kim+San&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Lim+Swee+Say&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Lui+Tuck+Yew&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Mah+Bow+Tan&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Masagos+Zulkifli&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Mohamad+Maliki+bin+Osman&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Ng+Chee+Meng&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Ng+Eng+Hen&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Ong+Pang+Boon&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Ong+Teng+Cheong&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Ong+Ye+Kung&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Othman+Wok&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Raymond+Lim+Siang+Keat&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Richard+Hu+Tsu+Tau&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=S+Dhanabalan&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=S+Iswaran&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=S+Jayakumar&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=S+Rajaratnam&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Seet+Ai+Mee&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Teh+Cheang+Wan&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Teo+Chee+Hean&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Tharman+Shanmugaratnam&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Toh+Chin+Chye&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Tony+Tan+Keng+Yam&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Vivian+Balakrishnan&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Wong+Kan+Seng&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Wong+Lin+Ken&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Yaacob+Ibrahim&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Yeo+Cheow+Tong&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Yeo+Ning+Hong&page-num=\>\"", ",", 
+       "\"\<https://www.nas.gov.sg/archivesonline/speeches/search-result?\
+search-type=advanced&speaker=Yong+Nyuk+Lin&page-num=\>\""}], "}"}]}], ";"}], 
+   "\n", 
+   RowBox[{
+    RowBox[{"pageRanges", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "29"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "28"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "2"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "1"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "17"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "6"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "2"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "5"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "1"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "7"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "29"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "71"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "18"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "10"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "3"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "12"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "3"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "5"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "9"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "2"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "3"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "5"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "3"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "28"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "8"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "49"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "67"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "21"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "11"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "9"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "31"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "10"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "12"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "11"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "12"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "24"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "11"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "3"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "1"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "23"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "13"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "27"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "2"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "21"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "11"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "9"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "12"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "26"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "18"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "10"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "6"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "7"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "51"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "24"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "11"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "38"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "28"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "32"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "2"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "20"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "30"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "17"}], "]"}], ",", 
+       RowBox[{"Range", "[", 
+        RowBox[{"1", ",", "15"}], "]"}]}], "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"folders", "=", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<AbdullahTarmugi\>\"", ",", "\"\<AhmadMattar\>\"", ",", 
+       "\"\<ChanChunSing\>\"", ",", "\"\<CheeHongTat\>\"", ",", 
+       "\"\<ChuaSianChin\>\"", ",", "\"\<DavidLimTikEn\>\"", ",", 
+       "\"\<DesmondLeeTi-Seng\>\"", ",", "\"\<EWBarker\>\"", ",", 
+       "\"\<EdwinTong\>\"", ",", "\"\<GanKimYong\>\"", ",", 
+       "\"\<GeorgeYeoYong-Boon\>\"", ",", "\"\<GohChokTong\>\"", ",", 
+       "\"\<GohKengSwee\>\"", ",", "\"\<GraceFuHaiYien\>\"", ",", 
+       "\"\<HengSweeKeat\>\"", ",", "\"\<HonSuiSen\>\"", ",", 
+       "\"\<HoweYoonChong\>\"", ",", "\"\<IndraneeRajah\>\"", ",", 
+       "\"\<JekYeunThong\>\"", ",", "\"\<JosephineTeo\>\"", ",", 
+       "\"\<KShanmugam\>\"", ",", "\"\<KhawBoonWan\>\"", ",", 
+       "\"\<LawrenceWong\>\"", ",", "\"\<LeeBoonYang\>\"", ",", 
+       "\"\<LeeChiawMeng\>\"", ",", "\"\<LeeHsienLoong\>\"", ",", 
+       "\"\<LeeKuanYew\>\"", ",", "\"\<LeeYockSuan\>\"", ",", 
+       "\"\<LimBoonHeng\>\"", ",", "\"\<LimCheeOnn\>\"", ",", 
+       "\"\<LimHngKiang\>\"", ",", "\"\<LimHweeHua\>\"", ",", 
+       "\"\<LimKimSan\>\"", ",", "\"\<LimSweeSay\>\"", ",", 
+       "\"\<LuiTuckYew\>\"", ",", "\"\<MahBowTan\>\"", ",", 
+       "\"\<MasagosZulkifli\>\"", ",", "\"\<MohamadMalikibinOsman\>\"", ",", 
+       "\"\<NgCheeMeng\>\"", ",", "\"\<NgEngHen\>\"", ",", 
+       "\"\<OngPangBoon\>\"", ",", "\"\<OngTengCheong\>\"", ",", 
+       "\"\<OngYeKung\>\"", ",", "\"\<OthmanWok\>\"", ",", 
+       "\"\<RaymondLimSiangKeat\>\"", ",", "\"\<RichardHuTsuTau\>\"", ",", 
+       "\"\<SDhanabalan\>\"", ",", "\"\<SIswaran\>\"", ",", 
+       "\"\<SJayakumar\>\"", ",", "\"\<SRajaratnam\>\"", ",", 
+       "\"\<SeetAiMee\>\"", ",", "\"\<TehCheangWan\>\"", ",", 
+       "\"\<TeoCheeHean\>\"", ",", "\"\<TharmanShanmugaratnam\>\"", ",", 
+       "\"\<TohChinChye\>\"", ",", "\"\<TonyTanKengYam\>\"", ",", 
+       "\"\<VivianBalakrishnan\>\"", ",", "\"\<WongKanSeng\>\"", ",", 
+       "\"\<WongLinKen\>\"", ",", "\"\<YaacobIbrahim\>\"", ",", 
+       "\"\<YeoCheowTong\>\"", ",", "\"\<YeoNingHong\>\"", ",", 
+       "\"\<YongNyukLin\>\""}], "}"}]}], ";"}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"downloadSpeeches", "[", 
+    RowBox[{"urls", ",", "pageRanges", ",", "folders"}], "]"}], 
+   "\n"}]}]], "Input",
+ CellChangeTimes->{{3.9078211278539333`*^9, 3.9078211278569756`*^9}, {
+  3.907830046893408*^9, 3.907830058907508*^9}, {3.907830100214655*^9, 
+  3.90783010119009*^9}, {3.907830846817464*^9, 3.9078308475390053`*^9}, {
+  3.908606013203249*^9, 3.9086060917281866`*^9}, {3.908606126550943*^9, 
+  3.9086061930325947`*^9}},ExpressionUUID->"96170ea3-3d5b-4ce2-b266-\
+2d20455f46b9"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "URLFetch", "invhttp", 
+   "\"A library error occurred. The raw details are: \\\"libcurl error \
+(\\!\\(\\*RowBox[{\\\"23\\\"}]\\)): \\!\\(\\*RowBox[{\\\"\\\\\\\"Failure \
+writing output to destination\\\\\\\"\\\"}]\\)\\\"\"", 2, 329, 107, 
+   22366772532414520445, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.907840523987796*^9},
+ CellLabel->
+  "During evaluation of \
+In[324]:=",ExpressionUUID->"9d101b91-b9b2-4951-a92e-8c1e4616da12"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", 
+   ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", 
+   "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", 
+   ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", 
+   "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", 
+   ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", 
+   "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", 
+   ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", 
+   "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", 
+   ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null", ",", 
+   "Null", ",", "Null", ",", "Null", ",", "Null", ",", "Null"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{3.907830724517788*^9, 3.907830805149043*^9, 
+  3.907849999757965*^9},
+ CellLabel->
+  "Out[329]=",ExpressionUUID->"449b8bd9-cbf6-4189-9550-75116817b22c"]
+}, Open  ]]
+},
+WindowSize->{949, 521},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>1. Inherited,
+FrontEndVersion->"13.3 for Microsoft Windows (64-bit) (July 24, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"80ea032b-debf-4dbc-b913-0a554ec5185f"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 19840, 392, 3111, "Input",ExpressionUUID->"96170ea3-3d5b-4ce2-b266-2d20455f46b9"],
+Cell[20423, 416, 495, 11, 28, "Message",ExpressionUUID->"9d101b91-b9b2-4951-a92e-8c1e4616da12"],
+Cell[20921, 429, 1051, 18, 71, "Output",ExpressionUUID->"449b8bd9-cbf6-4189-9550-75116817b22c"]
+}, Open  ]]
+}
+]
+*)
+
